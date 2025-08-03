@@ -8,7 +8,10 @@ app.use(session({
     secret: 'spotify_secret_session', // cambia esto en producción por algo más seguro
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false } // true solo si usas https
+    cookie: {
+    secure: true,       // necesario para HTTPS
+    sameSite: 'lax'     // o 'none' si usas frontend en otro dominio
+    }
 }));
 
 const PORT = 3000;
