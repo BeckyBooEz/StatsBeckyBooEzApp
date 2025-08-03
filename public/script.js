@@ -2,8 +2,10 @@ async function ObtenerCanciones() {
     try {
         const response = await fetch("/api/recently-played");
 
-        if (response.status === 401){
+        if (response.status === 401 && window.location.pathname !== "/login") {
+            console.warn("Sesión no iniciada, redirigiendo a login...");
             window.location.href = "/login";
+            return;
         }
 
         const canciones = await response.json();
@@ -95,10 +97,13 @@ async function obtenerTop() {
     const timeRange = timeSelect.value;
 
     const res = await fetch(`/api/top?type=${type}&time_range=${timeRange}`);
-    if (res.status === 401) {
-    window.location.href = "/login";
-    return;
+
+    if (res.status === 401 && window.location.pathname !== "/login") {
+        console.warn("Sesión no iniciada, redirigiendo a login...");
+        window.location.href = "/login";
+        return;
     }
+
     const data = await res.json();
 
     if (type === "tracks") {
@@ -226,12 +231,15 @@ async function recentplayed() {
     try {
         const res = await fetch("/api/recently-played");
 
-        if (res.status === 401) {
-            window.location.href = "/login"
+        if (res.status === 401 && window.location.pathname !== "/login") {
+            console.warn("Sesión no iniciada, redirigiendo a login...");
+            window.location.href = "/login";
+            return;
         }
-        const data = await res.json();
 
+        const data = await res.json();
         cancionesRecentlyPlayed(data.items)
+
     } catch (error) {
         console.error("No se cargaron canciones:", error);
     }
