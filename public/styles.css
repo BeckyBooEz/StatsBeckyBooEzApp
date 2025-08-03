@@ -1,0 +1,117 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+  width: 100%;
+  color: white;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+header {
+  display: flex;
+  width: 100%;
+  background-color: black;
+  height: 80px;
+  align-items: center;
+}
+
+header img{
+    height: 100%;
+    padding: 20px;
+}
+
+header .creador {
+    height: inherit;
+}
+
+header h1 {
+  color: white;
+}
+
+header ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+header ul li {
+  padding: 10px;
+}
+
+.creador .nose{
+    color: red;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(18, 18, 18)
+}
+
+#Contenedor-Stats {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 20px 10px;
+}
+
+#content-recently-played-img {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 10px 10px;
+  gap: 10px;
+}
+
+.card-recentyl-played {
+  text-align: center;
+  background-color: rgb(36, 36, 36);
+  height: auto;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.card-info {
+  width: 100%;
+  padding: 20px 20px;
+}
+
+.card-info img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.card-info p,
+h3 {
+  padding-top: 10px;
+}
+
+#results{
+    width: auto;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+}
+
+.track-card{
+    height: auto;
+    padding: 10px;
+    word-break: normal;
+}
+
+.card-datos-artist{
+    background-color: rgb(36, 36, 36);
+}
+
+.card-datos-track{
+    background-color: rgb(36, 36, 36);
+}

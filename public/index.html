@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <header>
+        <img src="./Full_Logo_White_RGB.svg" alt="LogoSpotify">
+        <div class="creador">
+            <h1>Arturo Miranda</h1>
+            <ul>
+                <li><a href="https://www.facebook.com/Arturo.Miranda.Ez">FaceBook</a></li>
+                <li><a href="https://www.instagram.com/arturo.miranda.ez/">Instagram</a></li>
+                <li><a href="https://x.com/ArturoMirandaEz">X</a></li>
+                <li><a href="https://www.tiktok.com/@arturo.miranda.ez">Tiktok</a></li>
+            </ul>
+        </div>
+        <div class="Nose">No sé que poner aca</div>
+    </header>
+    <main>
+        <div id="filtros">
+            <label for="type">Tipo</label>
+            <select name="type" id="type">
+                <option value="tracks">Canciones</option>
+                <option value="artists">Artistas</option>
+            </select>
+            <label for="time_range">Rango de tiempo:</label>
+            <select name="time_range" id="time_range">
+                <option value="short_term">Últimas 4 semanas</option>
+                <option value="medium_term">Últimos 6 meses</option>
+                <option value="long_term">Varios años</option>
+            </select>
+        </div>
+        <div id="Contenedor-Stats">
+            <div id="Stats">
+                <h1>Estadisticas</h1>
+                <div>
+                    <h1>Artistas escuchados recientemente</h1>
+                    <div id="content-recently-played-text"></div>
+                    <div id="content-recently-played-img"></div>
+                </div>
+            </div>
+            <div id="results"></div>
+        </div>
+    </main>
+    <script src="./script.js"></script>
+</body>
+
+</html>
