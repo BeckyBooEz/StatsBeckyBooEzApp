@@ -4,13 +4,15 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 
+app.set('trust proxy', 1); // ✅ IMPORTANTE en Render o cualquier proxy
+
 app.use(session({
-    secret: 'spotify_secret_session', // cambia esto en producción por algo más seguro
+    secret: 'spotify_secret_session',
     resave: false,
     saveUninitialized: false,
     cookie: {
-    secure: true,       // necesario para HTTPS
-    sameSite: 'lax'     // o 'none' si usas frontend en otro dominio
+        secure: true,
+        sameSite: 'lax'
     }
 }));
 
