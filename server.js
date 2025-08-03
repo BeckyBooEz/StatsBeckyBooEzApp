@@ -81,12 +81,9 @@ app.get("/login", (req, res) => {
     res.redirect(url)
 });
 
-/* Ruta del callback de spotify */
 app.get("/api/callback", async (req, res) => {
-    /* sacar del del url el code */
     const code = req.query.code;
 
-    /* metemos en una variable todos los parametros para obtener el token de user*/
     const params = new URLSearchParams();
     params.append("grant_type", "authorization_code");
     params.append("code", code);
@@ -94,29 +91,38 @@ app.get("/api/callback", async (req, res) => {
     params.append("client_id", ClientId);
     params.append("client_secret", ClientSecret);
 
-    /* realizamos el fetch a api/token, pero dandole los parametros al body */
     const response = await fetch("https://accounts.spotify.com/api/token", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        /* metemos los parametros al body y lo convertimos en string */
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: params.toString()
     });
 
-    /* Awai para la respuesta y la convertimos en json para js */
     const data = await response.json();
 
-    /* Si existe acces_token en data, lo metemos en la variable global*/
     if (data.access_token) {
         req.session.access_token = data.access_token;
         req.session.refresh_token = data.refresh_token;
+
+        // 🔍 Obtener perfil del usuario
+        const profileRes = await fetch("https://api.spotify.com/v1/me", {
+            headers: { Authorization: `Bearer ${data.access_token}` }
+        });
+        const profile = await profileRes.json();
+        req.session.user = {
+            id: profile.id,
+            name: profile.display_name || profile.id,
+            email: profile.email
+        };
+
+        console.log("🆔 Nuevo login:");
+        console.log("  - Session ID:", req.sessionID);
+        console.log("  - Usuario:", req.session.user);
+
         res.redirect("/");
     } else {
         console.error("Error en el token:", data);
         res.status(400).send("Error al iniciar sesión");
     }
-
 });
 
 /* Endpoint de las recently-played */
@@ -127,6 +133,12 @@ app.get("/api/recently-played", async (req, res) => {
     }
 
     const nowplayed = Date.now();
+
+    console.log("🎧 Solicitud de canciones:");
+    console.log("  - Session ID:", req.sessionID);
+    console.log("  - Usuario:", req.session.user);
+    console.log("  - Token:", req.session.access_token?.slice(0, 20) + "...");
+
 
     const response = await fetch(`https://api.spotify.com/v1/me/player/recently-played?before=${nowplayed}&limit=50`, {
         headers: {
@@ -153,6 +165,12 @@ app.get("/api/top", async (req, res) => {
     if (!token) {
         return res.status(401).json({ error: "No se ha iniciado sesión" });
     }
+
+    console.log("🎧 Solicitud de canciones:");
+    console.log("  - Session ID:", req.sessionID);
+    console.log("  - Usuario:", req.session.user);
+    console.log("  - Token:", req.session.access_token?.slice(0, 20) + "...");
+
 
     try {
         const response = await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${time_range}&limit=50`, {
