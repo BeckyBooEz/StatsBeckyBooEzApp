@@ -1,6 +1,11 @@
 async function ObtenerCanciones() {
     try {
         const response = await fetch("/api/recently-played");
+
+        if (response.status === 401){
+            window.location.href = "/login";
+        }
+
         const canciones = await response.json();
 
         const todosLosArtistas = [];
@@ -90,6 +95,10 @@ async function obtenerTop() {
     const timeRange = timeSelect.value;
 
     const res = await fetch(`/api/top?type=${type}&time_range=${timeRange}`);
+    if (res.status === 401) {
+    window.location.href = "/login";
+    return;
+    }
     const data = await res.json();
 
     if (type === "tracks") {
@@ -216,6 +225,10 @@ function crearCartaArtistas(artist) {
 async function recentplayed() {
     try {
         const res = await fetch("/api/recently-played");
+
+        if (res.status === 401) {
+            window.location.href = "/login"
+        }
         const data = await res.json();
 
         cancionesRecentlyPlayed(data.items)
