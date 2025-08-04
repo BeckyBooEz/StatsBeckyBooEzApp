@@ -176,6 +176,5 @@ app.get("/api/top", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://127.0.0.1:${PORT}`)
     console.log("REDIRECT_URI en uso:", RedirectUri);
 });
