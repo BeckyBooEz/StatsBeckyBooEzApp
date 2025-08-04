@@ -4,15 +4,15 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 
-app.set('trust proxy', 1);
+app.set("trust proxy", 1);
 
 app.use(session({
-    secret: 'spotify_secret_session',
+    secret: "spotify_secret_session",
     resave: false,
     saveUninitialized: false,
     cookie: {
         secure: "auto",
-        sameSite: 'lax'
+        sameSite: "lax"
     }
 }));
 
@@ -27,7 +27,8 @@ const RedirectUri = process.env.REDIRECT_URI;
 const Scopes = [
     "user-read-recently-played",
     "user-top-read",
-    "user-read-private"
+    "user-read-private",
+    "user-read-email"
 ].join(" ");
 
 app.get("/login", (req, res) => {
@@ -82,7 +83,9 @@ app.get("/api/callback", async (req, res) => {
 
         console.log("Nuevo login:");
         console.log("  - Session ID:", req.sessionID);
-        console.log("  - Usuario:", req.session.user);
+        console.log("  - ID:", req.session.user.id);
+        console.log("  - Nombre:", req.session.user.name);
+        console.log("  - Email:", req.session.user.email);
 
         res.redirect("/");
     } else {
@@ -99,7 +102,7 @@ app.get("/api/user/name", async (req, res) => {
 
     try {
         const response = await fetch("https://api.spotify.com/v1/me", {
-            headers: {Authorization: `Bearer ${token}`}
+            headers: { Authorization: `Bearer ${token}` }
         });
 
         if (!response.ok) {
