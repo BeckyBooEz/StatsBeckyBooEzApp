@@ -122,7 +122,7 @@ async function obteneruser(){
         const nombreuser= document.getElementById("user-name");
         nombreuser.textContent = data.display_name
         const imguser = document.getElementById("user-image")
-        imguser.src = data.images[1].url
+        imguser.src = data.images[0].url
         console.log(data)
     } catch (error) {
         console.log("No se pudo cargar user:", error)
