@@ -26,7 +26,8 @@ const RedirectUri = process.env.REDIRECT_URI;
 
 const Scopes = [
     "user-read-recently-played",
-    "user-top-read"
+    "user-top-read",
+    "user-read-private"
 ].join(" ");
 
 app.get("/login", (req, res) => {
