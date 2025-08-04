@@ -20,11 +20,14 @@ header {
   background-color: black;
   height: 80px;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 header img{
     height: 100%;
     padding: 20px;
+    display: flex;
+    justify-self: start;
 }
 
 header .creador {
