@@ -61,8 +61,8 @@ async function ObtenerCanciones() {
             }))
             .sort((a, b) => b.porcentaje - a.porcentaje);
 
-        const top4 = artistasOrdenados.slice(0, 4);
-        const otros = artistasOrdenados.slice(4);
+        const top4 = artistasOrdenados.slice(0, 9);
+        const otros = artistasOrdenados.slice(9);
 
         const tituloTop = document.createElement("h3");
         tituloTop.textContent = "Artistas más escuchados";

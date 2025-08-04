@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 
-app.set('trust proxy', 1); // ✅ IMPORTANTE en Render o cualquier proxy
+app.set('trust proxy', 1);
 
 app.use(session({
     secret: 'spotify_secret_session',
@@ -28,46 +28,6 @@ const Scopes = [
     "user-read-recently-played",
     "user-top-read"
 ].join(" ");
-
-/* let TokenTimeStamp = 0;
-let AccessToken = null; 
-async function GetToken() {
-    const now = Date.now();
-
-    if (!AccessToken || now - TokenTimeStamp > 3600 * 1000) {
-        const auth = Buffer.from(`${ClientId}:${ClientSecret}`).toString("base64");
-
-        const response = await fetch("https://accounts.spotify.com/api/token", {
-            method: "POST",
-            headers: {
-                "Authorization": `Basic ${auth}`,
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: "grant_type=client_credentials"
-        });
-
-        const data = await response.json();
-
-        AccessToken = data.access_token;
-        TokenTimeStamp = now
-    }
-    return AccessToken
-}
-app.get("/api/artista", async (req, res) => {
-    const { nombre } = req.query;
-
-    const token = await GetToken();
-
-    const searchUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(nombre)}&type=artist&limit=1`;
-    const response = await fetch(searchUrl, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
-
-    const data = await response.json();
-    res.json(data)
-}) */
 
 /* Esta ruta es para el login */
 app.get("/login", (req, res) => {
@@ -101,9 +61,9 @@ app.get("/api/callback", async (req, res) => {
     if (!data.access_token) {
         console.error("Error en el token:", data);
         return res.status(400).send(`
-        <h2>😕 Error al iniciar sesión con Spotify</h2>
+        <h2>Error al iniciar sesión con Spotify</h2>
         <p>${data.error_description || "Código inválido o expirado. Intenta iniciar sesión de nuevo."}</p>
-        <a href="/login">🔄 Volver a intentar</a>
+        <a href="/login">Volver a intentar</a>
     `);
     }
 
@@ -111,7 +71,6 @@ app.get("/api/callback", async (req, res) => {
         req.session.access_token = data.access_token;
         req.session.refresh_token = data.refresh_token;
 
-        // 🔍 Obtener perfil del usuario
         const profileRes = await fetch("https://api.spotify.com/v1/me", {
             headers: { Authorization: `Bearer ${data.access_token}` }
         });
@@ -122,7 +81,7 @@ app.get("/api/callback", async (req, res) => {
             email: profile.email
         };
 
-        console.log("🆔 Nuevo login:");
+        console.log("Nuevo login:");
         console.log("  - Session ID:", req.sessionID);
         console.log("  - Usuario:", req.session.user);
 
