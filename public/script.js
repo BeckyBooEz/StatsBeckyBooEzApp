@@ -70,14 +70,14 @@ async function ObtenerCanciones() {
 
         top4.forEach(artist => {
             const p = document.createElement("p");
-            p.textContent = `${artist.name} - (${artist.porcentaje.toFixed(2)}%)`;
+            p.textContent = `${artist.name} - ${artist.porcentaje.toFixed(2)}%`;
             contenedor.appendChild(p);
         });
 
         const porcentajeOtros = otros.reduce((acc, artist) => acc + artist.porcentaje, 0).toFixed(2);
 
         const pOtros = document.createElement("p");
-        pOtros.textContent = `Otros artistas - (${porcentajeOtros}%)`;
+        pOtros.textContent = `Otros artistas - ${porcentajeOtros}%`;
         contenedor.appendChild(pOtros);
 
     } catch (error) {
