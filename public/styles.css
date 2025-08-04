@@ -29,6 +29,7 @@ header img{
 
 header .creador {
     height: inherit;
+    display: flex;
 }
 
 .userdata{
@@ -45,6 +46,7 @@ header ul {
   display: flex;
   justify-content: center;
   list-style: none;
+  align-items: center;
 }
 
 header ul li {
