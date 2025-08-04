@@ -328,7 +328,7 @@ function calcularTiempo(tracks) {
     if (minutos > 0) partes.push(`${minutos} minuto${minutos === 1 ? "" : "s"}`);
     if (segundos > 0 || partes.length === 0) partes.push(`${segundos} segundo${segundos === 1 ? "" : "s"}`);
 
-    return `hace ${partes.slice(0, 2).join(", ")}`;
+    return `hace ${partes.slice(0, 2).join(" y ")}`;
 }
 ObtenerCanciones();
 recentplayed();
