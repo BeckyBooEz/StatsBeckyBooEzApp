@@ -113,6 +113,24 @@ async function obtenerTop() {
     };
 };
 
+async function obteneruser(){
+    try {
+        const response = await fetch("/api/user/name");
+
+        const data = await response.json()
+
+        const nombreuser= document.getElementById("user-name");
+        nombreuser.textContent = data.display_name
+        const imguser = document.getElementById("user-image")
+        imguser.src = data.images[1].url
+        console.log(data)
+    } catch (error) {
+        console.log("No se pudo cargar user:", error)
+    }
+}
+
+obteneruser()
+
 function mostrarCanciones(tracks) {
     const container = document.getElementById("results");
     container.innerHTML = "";
@@ -142,6 +160,7 @@ function mostrarArtistas(artists) {
         container.appendChild(carddatos)
     });
 };
+
 
 function crearCartaCanciones(track) {
     const card = document.createElement("div");

@@ -31,6 +31,12 @@ header .creador {
     height: inherit;
 }
 
+.userdata{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 header h1 {
   color: white;
 }

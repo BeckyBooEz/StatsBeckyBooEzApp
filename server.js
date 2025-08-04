@@ -11,7 +11,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: true,
+        secure: false,
         sameSite: 'lax'
     }
 }));
@@ -29,9 +29,7 @@ const Scopes = [
     "user-top-read"
 ].join(" ");
 
-/* Esta ruta es para el login */
 app.get("/login", (req, res) => {
-    /* Construimos un url para auhorizar y nos de un code en url*/
     const url = `https://accounts.spotify.com/authorize` +
         `?response_type=code` +
         `&client_id=${encodeURIComponent(ClientId)}` +
@@ -92,7 +90,31 @@ app.get("/api/callback", async (req, res) => {
     }
 });
 
-/* Endpoint de las recently-played */
+app.get("/api/user/name", async (req, res) => {
+    const token = req.session.access_token;
+    if (!token) {
+        return res.status(401).json({ error: "No se ha iniciado sesión" });
+    }
+
+    try {
+        const response = await fetch("https://api.spotify.com/v1/me", {
+            headers: {Authorization: `Bearer ${token}`}
+        });
+
+        if (!response.ok) {
+            const text = await response.text();
+            console.error("Spotify error (me):", text);
+            return res.status(500).json({ error: "Error al obtener nombre usuario desde Spotify." });
+        }
+
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error("Error interno:", error);
+        res.status(500).json({ error: "Error interno del servidor." });
+    }
+})
+
 app.get("/api/recently-played", async (req, res) => {
     const token = req.session.access_token;
     if (!token) {
@@ -106,7 +128,7 @@ app.get("/api/recently-played", async (req, res) => {
         });
 
         if (!response.ok) {
-            const text = await response.text(); // puede ser HTML o texto plano
+            const text = await response.text();
             console.error("Spotify error (recently-played):", text);
             return res.status(500).json({ error: "Error al obtener canciones desde Spotify." });
         }
