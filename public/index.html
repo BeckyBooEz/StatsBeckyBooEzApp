@@ -11,37 +11,35 @@
 
 <body>
     <header>
-        <img src="./images/Full_Logo_White_RGB.svg" alt="LogoSpotify">
+        <img class="spotify-logo" src="./images/Full_Logo_White_RGB.svg" alt="LogoSpotify" height="80px">
         <div class="Nose">No sé que poner aca</div>
-        <div class="creador">
-            <ul class="redes-creador">
-                <li><a href="https://www.facebook.com/Arturo.Miranda.Ez">Facebook</a></li>
-                <li><a href="https://www.instagram.com/arturo.miranda.ez/">Instagram</a></li>
-                <li><a href="https://x.com/ArturoMirandaEz">X</a></li>
-                <li><a href="https://www.tiktok.com/@arturo.miranda.ez">Tiktok</a></li>
-            </ul>
-            <div class="userdata">
-                <div class="userperfil">
-                    <h1 id="user-name"></h1>
-                    <p id="user-type"></p>
-                </div>
-                <img id="user-image" src="" alt="">
+        <div class="userdata">
+            <div class="userperfil">
+                <p id="user-name"> <strong>Arturo Miranda</strong> </p>
+                <p id="user-type">(Premium)</p>
+            </div>
+            <div class="contenedor-image">
+                <img id="user-image" src="./images/64x64.png" alt="Imagen aleatoria">
             </div>
         </div>
     </header>
+    <!-- Header ya esta listo,  -->
     <main>
         <div id="filtros">
-            <label for="type">Tipo</label>
-            <select name="type" id="type">
-                <option value="tracks">Canciones</option>
-                <option value="artists">Artistas</option>
-            </select>
-            <label for="time_range">Rango de tiempo:</label>
-            <select name="time_range" id="time_range">
-                <option value="short_term">Últimas 4 semanas</option>
-                <option value="medium_term">Últimos 6 meses</option>
-                <option value="long_term">Varios años</option>
-            </select>
+            <div class="filtros-labels">
+                <label for="type">Tipo:</label>
+                <select name="type" id="type">
+                    <option value="tracks">Canciones</option>
+                    <option value="artists">Artistas</option>
+                </select>
+                <label for="time_range">Rango de tiempo:</label>
+                <select name="time_range" id="time_range">
+                    <option value="short_term">Mensual</option>
+                    <option value="medium_term">Semestral</option>
+                    <option value="long_term">Anual</option>
+                </select>
+            </div>
+            <div id="results"></div>
         </div>
         <div id="Contenedor-Stats">
             <div id="Stats">
@@ -52,11 +50,15 @@
                     <div id="content-recently-played-img"></div>
                 </div>
             </div>
-            <div id="results"></div>
         </div>
     </main>
     <footer>
-
+        <ul class="redes-creador">
+            <li><a href="https://www.facebook.com/Arturo.Miranda.Ez">Facebook</a></li>
+            <li><a href="https://www.instagram.com/arturo.miranda.ez/">Instagram</a></li>
+            <li><a href="https://x.com/ArturoMirandaEz">X</a></li>
+            <li><a href="https://www.tiktok.com/@arturo.miranda.ez">Tiktok</a></li>
+        </ul>
     </footer>
     <script src="./script.js"></script>
 </body>

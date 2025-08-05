@@ -14,132 +14,124 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-header {
+header{
+  background: black;
+  color: white;
   display: flex;
-  width: 100%;
-  background-color: black;
-  height: 80px;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 80px;
 }
 
-header img {
-  height: 100%;
-  padding: 20px;
-  display: flex;
-}
-
-.creador {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
+.spotify-logo{
+  padding: 10px 20px;
 }
 
 .userdata{
-  width: 50%;
   height: 100%;
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  padding: 10px 20px;
 }
 
-.redes-creador{
-  width: 40%;
+.userperfil{
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.userperfil {
+
+.contenedor-image{
   display: flex;
   height: 100%;
-  width: 70%;
-  flex-direction: column;
 }
 
 #user-image{
-  height: auto;
-  padding: 0;
+  height: 100%;
+  background-color: red;
+  border-radius: 50px;
 }
-
-header h1 {
-  color: white;
-}
-
-header ul {
+main{
+  width: 100%;
+  padding: 5px 10px;
   display: flex;
-  justify-content: center;
-  list-style: none;
-  align-items: center;
-  width: 40%;
+  flex-direction: row-reverse;
+  justify-content: start;
+  background-color: rgb(0, 0, 0);
 }
 
-header ul li {
-  padding: 10px;
-}
-
-.nose {
-  color: red;
-}
-
-main {
+#filtros{
   display: flex;
   flex-direction: column;
+  justify-content: start;
   align-items: center;
-  background: rgb(18, 18, 18);
+  padding: 10px;
+  width: 20%;
 }
 
-#Contenedor-Stats {
+.filtros-labels{
   display: flex;
-  width: 100%;
-  justify-content: space-between;
-  padding: 20px 10px;
 }
 
-#content-recently-played-img {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin: 10px 10px;
-  gap: 10px;
+#filtros label{
+  padding: 10px 5px;
 }
 
-.card-recentyl-played {
-  text-align: center;
-  background-color: rgb(36, 36, 36);
-  height: auto;
-  display: flex;
-  justify-content: center;
-  border-radius: 10px;
-}
-
-.card-info {
-  width: 100%;
-  padding: 20px 20px;
-}
-
-.card-info img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.card-info p,
-h3 {
-  padding-top: 10px;
-}
-
-#results {
-  width: auto;
+#results{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 10px;
 }
 
-.track-card {
-  height: auto;
-  padding: 10px;
-  word-break: normal;
+#Contenedor-Stats{
+  width: 80%;
 }
 
-.card-datos-artist {
-  background-color: rgb(36, 36, 36);
+#Stats{
+  display: flex;
+  flex-direction: column;
 }
 
-.card-datos-track {
-  background-color: rgb(36, 36, 36);
+#content-recently-played-img{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-top: 10px;
+  gap: 10px;
+}
+
+.track-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-info img {
+  border-radius: 10px;
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+}
+
+.card-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px;
+  background-color: #656565;
+}
+
+footer{
+  display: flex;
+  justify-content: center;
+}
+.redes-creador{
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+
+.redes-creador li{
+  list-style: none;
+  padding: 10px 20px;
 }
