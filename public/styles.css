@@ -20,25 +20,41 @@ header {
   background-color: black;
   height: 80px;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
-header img{
-    height: 100%;
-    padding: 20px;
-    display: flex;
-    justify-self: start;
+header img {
+  height: 100%;
+  padding: 20px;
+  display: flex;
 }
 
-header .creador {
-    height: inherit;
-    display: flex;
+.creador {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .userdata{
+  width: 50%;
+  height: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
+}
+
+.redes-creador{
+  width: 40%;
+}
+.userperfil {
+  display: flex;
+  height: 100%;
+  width: 70%;
+  flex-direction: column;
+}
+
+#user-image{
+  height: auto;
+  padding: 0;
 }
 
 header h1 {
@@ -50,21 +66,22 @@ header ul {
   justify-content: center;
   list-style: none;
   align-items: center;
+  width: 40%;
 }
 
 header ul li {
   padding: 10px;
 }
 
-.creador .nose{
-    color: red;
+.nose {
+  color: red;
 }
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgb(18, 18, 18)
+  background: rgb(18, 18, 18);
 }
 
 #Contenedor-Stats {
@@ -76,7 +93,7 @@ main {
 
 #content-recently-played-img {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   margin: 10px 10px;
   gap: 10px;
 }
@@ -106,23 +123,23 @@ h3 {
   padding-top: 10px;
 }
 
-#results{
-    width: auto;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 10px;
+#results {
+  width: auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
 }
 
-.track-card{
-    height: auto;
-    padding: 10px;
-    word-break: normal;
+.track-card {
+  height: auto;
+  padding: 10px;
+  word-break: normal;
 }
 
-.card-datos-artist{
-    background-color: rgb(36, 36, 36);
+.card-datos-artist {
+  background-color: rgb(36, 36, 36);
 }
 
-.card-datos-track{
-    background-color: rgb(36, 36, 36);
+.card-datos-track {
+  background-color: rgb(36, 36, 36);
 }
