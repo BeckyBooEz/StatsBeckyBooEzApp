@@ -1,91 +1,3 @@
-async function ObtenerCanciones() {
-    try {
-        const response = await fetch("/api/recently-played");
-
-        if (response.status === 401 && window.location.pathname !== "/login") {
-            console.warn("Sesión no iniciada, redirigiendo a login...");
-            window.location.href = "/login";
-            return;
-        }
-
-        const canciones = await response.json();
-
-        const todosLosArtistas = [];
-        const estadisticas = canciones.items
-
-        estadisticas.forEach(item => {
-            const artistas = item.track.artists;
-
-            const colaboradores = artistas.slice(1);
-            const pesosBrutos = colaboradores.map((_, i) => 1 / (i + 1));
-
-            const sumaBruta = pesosBrutos.reduce((a, b) => a + b, 0);
-            const pesosNormalizados = pesosBrutos.map(p => (p / sumaBruta) * 0.5);
-
-            artistas.forEach((artista, index) => {
-                let peso = 0;
-
-                if (index === 0) {
-                    peso = 1.0;
-                } else {
-                    peso = pesosNormalizados[index - 1];
-                }
-
-                todosLosArtistas.push({
-                    name: artista.name,
-                    id: artista.id,
-                    peso: peso
-                });
-            });
-        });
-
-        const repeticiones = {};
-
-        todosLosArtistas.forEach(({ id, name, peso }) => {
-            if (!repeticiones[id]) {
-                repeticiones[id] = { name, repit: 0 };
-            }
-            repeticiones[id].repit += peso;
-        });
-
-        const contenedor = document.getElementById("content-recently-played-text");
-        contenedor.style.display = "flex";
-        contenedor.style.flexDirection = "column";
-
-        const totalReps = Object.values(repeticiones).reduce((total, actual) => total + actual.repit, 0);
-
-        const artistasOrdenados = Object.values(repeticiones)
-            .map(artist => ({
-                ...artist,
-                porcentaje: (artist.repit / totalReps) * 100
-            }))
-            .sort((a, b) => b.porcentaje - a.porcentaje);
-
-        const top4 = artistasOrdenados.slice(0, 9);
-        const otros = artistasOrdenados.slice(9);
-
-        const tituloTop = document.createElement("h3");
-        tituloTop.textContent = "Artistas más escuchados";
-        contenedor.appendChild(tituloTop);
-
-        top4.forEach(artist => {
-            const p = document.createElement("p");
-            p.textContent = `${artist.name} - ${artist.porcentaje.toFixed(2)}%`;
-            contenedor.appendChild(p);
-        });
-
-        const porcentajeOtros = otros.reduce((acc, artist) => acc + artist.porcentaje, 0).toFixed(2);
-
-        const pOtros = document.createElement("p");
-        pOtros.textContent = `Otros artistas - ${porcentajeOtros}%`;
-        contenedor.appendChild(pOtros);
-
-    } catch (error) {
-        console.error("No se cargaron canciones:", error);
-    }
-};
-
-
 const typeSelect = document.getElementById("type");
 const timeSelect = document.getElementById("time_range");
 
@@ -113,32 +25,11 @@ async function obtenerTop() {
     };
 };
 
-async function obteneruser() {
-    try {
-        const response = await fetch("/api/user/name");
-
-        const data = await response.json()
-
-        const nombreuser = document.getElementById("user-name");
-        nombreuser.textContent = data.display_name
-        const imguser = document.getElementById("user-image")
-        imguser.src = data.images[0].url
-        const usertype = document.getElementById("user-type");
-        const usertypemayus = data.product.charAt(0).toUpperCase() + data.product.slice(1).toLowerCase();
-        usertype.textContent = usertypemayus;
-
-    } catch (error) {
-        console.log("No se pudo cargar user:", error)
-    }
-}
-
-obteneruser()
-
 function mostrarCanciones(tracks) {
     const container = document.getElementById("results");
     container.innerHTML = "";
 
-    tracks.slice(0, 5).forEach(track => {
+    tracks.forEach(track => {
         const card = crearCartaCanciones(track)
         const carddatos = document.createElement("div")
         carddatos.classList.add("card-datos-track")
@@ -169,11 +60,12 @@ function crearCartaCanciones(track) {
     const card = document.createElement("div");
     card.classList.add("track-card");
 
+    const imgContenedor = document.createElement("div")
+    imgContenedor.classList.add("track-card-img")
     const img = document.createElement("img")
     img.src = track.album.images[0].url;
     img.width = 200;
     img.height = 200;
-    img.style.objectFit = "cover";
 
     const cancion = document.createElement("h3");
     cancion.textContent = track.name;
@@ -199,7 +91,8 @@ function crearCartaCanciones(track) {
     url.target = "_blank";
     url.style.textDecoration = "none";
 
-    card.appendChild(img);
+    imgContenedor.appendChild(img);
+    card.appendChild(imgContenedor)
     card.appendChild(cancion);
     card.appendChild(artista);
     card.appendChild(album);
@@ -227,7 +120,6 @@ function crearCartaArtistas(artist) {
     img.src = artist.images[0].url;
     img.width = 200;
     img.height = 200;
-    img.style.objectFit = "cover";
 
     const artista = document.createElement("h3")
     artista.textContent = artist.name;
@@ -251,7 +143,7 @@ function crearCartaArtistas(artist) {
 
 async function recentplayed() {
     try {
-        const res = await fetch("/api/recently-played");
+        const res = await fetch("/api/recently-played")
 
         if (res.status === 401 && window.location.pathname !== "/login") {
             console.warn("Sesión no iniciada, redirigiendo a login...");
@@ -265,23 +157,27 @@ async function recentplayed() {
     } catch (error) {
         console.error("No se cargaron canciones:", error);
     }
-}
+};
 
 function cancionesRecentlyPlayed(tracks) {
-    const contenedor = document.getElementById("content-recently-played-img");
-    tracks.slice(0, 12).forEach(track => {
+    const contenedor = document.getElementById("content-recently-played-tracks");
+    tracks.forEach(track => {
         const tarjeta = document.createElement("div")
         tarjeta.classList.add("card-recentyl-played");
 
         const datostarjeta = document.createElement("div");
         datostarjeta.classList.add("card-info")
 
+        const portadaContainer = document.createElement("div");
+        portadaContainer.classList.add("card-img")
         const portada = document.createElement("img");
         portada.src = track.track.album.images[0].url;
-        portada.width = 150;
-        portada.height = 150;
-        portada.style.objectFit = "cover";
+        portada.width = 200;
+        portada.height = 200;
+        portadaContainer.appendChild(portada)
 
+        const datosContainer = document.createElement("div")
+        datosContainer.classList.add("card-parrafo")
         const cancion = document.createElement("h3");
         cancion.textContent = track.track.name;
 
@@ -289,7 +185,7 @@ function cancionesRecentlyPlayed(tracks) {
         popularidad.textContent = `Pop: ${track.track.popularity}`
 
         const album = document.createElement("p");
-        album.innerHTML = `<strong>Album: </strong> ${track.track.album.name}`;
+        album.innerHTML = track.track.album.name;
 
         const artist = document.createElement("p");
         artist.textContent = track.track.album.artists[0].name
@@ -298,15 +194,16 @@ function cancionesRecentlyPlayed(tracks) {
         const marcadetiempo = document.createElement("p");
         marcadetiempo.textContent = calcularTiempo(track)
 
-        datostarjeta.appendChild(portada)
-        datostarjeta.appendChild(cancion)
-        datostarjeta.appendChild(popularidad)
-        datostarjeta.appendChild(album);
-        datostarjeta.appendChild(artist)
-        datostarjeta.appendChild(marcadetiempo)
+        datostarjeta.appendChild(portadaContainer)
+        datosContainer.appendChild(cancion)
+        datosContainer.appendChild(popularidad)
+        datosContainer.appendChild(album)
+        datosContainer.appendChild(artist);
+        datosContainer.appendChild(marcadetiempo)
+        datostarjeta.appendChild(datosContainer)
 
         tarjeta.appendChild(datostarjeta)
-        contenedor.append(tarjeta);
+        contenedor.appendChild(tarjeta);
     });
 }
 
@@ -334,7 +231,5 @@ function calcularTiempo(tracks) {
     return `hace ${partes.slice(0, 2).join(" y ")}`;
 }
 
-obteneruser()
-ObtenerCanciones()
 obtenerTop();
 recentplayed();
