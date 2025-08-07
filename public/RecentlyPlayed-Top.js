@@ -19,9 +19,9 @@ async function obtenerTop() {
     const data = await res.json();
 
     if (type === "tracks") {
-        mostrarCanciones(data.items);
+        mostrarCanciones(data.items.slice(0, 19));
     } else {
-        mostrarArtistas(data.items);
+        mostrarArtistas(data.items.slice(0, 19));
     };
 };
 
