@@ -93,15 +93,17 @@ main {
 }
 
 #content-recently-played-tracks {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
   width: 100%;
 }
 
 .card-recentyl-played {
   display: flex;
   justify-content: center;
+  flex: 0 1 250px;
   background-color: rebeccapurple;
 }
 .card-info {
