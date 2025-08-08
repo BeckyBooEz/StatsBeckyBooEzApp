@@ -12,6 +12,14 @@ body {
   overflow: auto;
 }
 
+p{
+  font-size: clamp(.5rem, 2vw, 1rem)
+}
+
+h3{
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
 body::-webkit-scrollbar {
   display: none;
 }
@@ -39,10 +47,11 @@ header {
 }
 
 .texto-alterno {
-  background-color: aqua;
   display: flex;
   align-items: center;
-  font-size: 2rem;
+}
+.texto-alterno p{
+  font-size: clamp(1rem, 2vw, 2rem);
 }
 
 #user-data {
@@ -188,12 +197,16 @@ select {
   #user-data {
     display: none;
   }
+  .header-logo-userdata{
+    justify-content: space-around;
+  }
   .logo,
   .texto-alterno {
+    display: flex;
     width: 50%;
   }
-  .card-parrafo h3,
-  p {
-    font-size: .5rem;
+  .texto-alterno{
+    justify-content: center;
+    text-align: center;
   }
 }
