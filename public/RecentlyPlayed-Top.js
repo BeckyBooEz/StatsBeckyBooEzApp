@@ -18,10 +18,11 @@ async function obtenerTop() {
 
     const data = await res.json();
 
+
     if (type === "tracks") {
-        mostrarCanciones(data.items.slice(0, 19));
+        mostrarCanciones(data.items.slice(0, 10));
     } else {
-        mostrarArtistas(data.items.slice(0, 19));
+        mostrarArtistas(data.items.slice(0, 10));
     };
 };
 
@@ -152,7 +153,14 @@ async function recentplayed() {
         }
 
         const data = await res.json();
-        cancionesRecentlyPlayed(data.items)
+
+
+        const unicos = data.items.filter((item, index, self) => {
+            return self.findIndex(i => i.track.id === item.track.id) === index;
+        });
+
+        cancionesRecentlyPlayed(unicos)
+
 
     } catch (error) {
         console.error("No se cargaron canciones:", error);
