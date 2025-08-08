@@ -12,11 +12,11 @@ body {
   overflow: auto;
 }
 
-p{
-  font-size: clamp(.5rem, 2vw, 1rem)
+p {
+  font-size: clamp(0.5rem, 2vw, 1rem);
 }
 
-h3{
+h3 {
   font-size: clamp(1rem, 2vw, 1.25rem);
 }
 
@@ -50,7 +50,7 @@ header {
   display: flex;
   align-items: center;
 }
-.texto-alterno p{
+.texto-alterno p {
   font-size: clamp(1rem, 2vw, 2rem);
 }
 
@@ -197,7 +197,7 @@ select {
   #user-data {
     display: none;
   }
-  .header-logo-userdata{
+  .header-logo-userdata {
     justify-content: space-around;
   }
   .logo,
@@ -205,8 +205,11 @@ select {
     display: flex;
     width: 50%;
   }
-  .texto-alterno{
+  .texto-alterno {
     justify-content: center;
     text-align: center;
+  }
+  #content-recently-played-tracks {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
