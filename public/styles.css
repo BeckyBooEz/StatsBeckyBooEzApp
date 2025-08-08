@@ -103,7 +103,7 @@ main {
 .card-recentyl-played {
   display: flex;
   justify-content: center;
-  flex: 0 1 250px;
+  flex: 0 1 360px;
   background-color: rebeccapurple;
 }
 .card-info {
