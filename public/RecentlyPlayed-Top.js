@@ -220,15 +220,11 @@ function calcularTiempo(tracks) {
     const minutos = Math.floor((segundosTotales % (60 * 60)) / 60);
     const segundos = segundosTotales % 60;
 
-    let partes = [];
-
-    if (semanas > 0) partes.push(`${semanas} semana${semanas === 1 ? "" : "s"}`);
-    if (dias > 0) partes.push(`${dias} día${dias === 1 ? "" : "s"}`);
-    if (horas > 0) partes.push(`${horas} hora${horas === 1 ? "" : "s"}`);
-    if (minutos > 0) partes.push(`${minutos} minuto${minutos === 1 ? "" : "s"}`);
-    if (segundos > 0 || partes.length === 0) partes.push(`${segundos} segundo${segundos === 1 ? "" : "s"}`);
-
-    return `hace ${partes.slice(0, 2).join(" y ")}`;
+    if (semanas > 0) return `hace ${semanas} semana${semanas === 1 ? "" : "s"}`;
+    if (dias > 0) return `hace ${dias} día${dias === 1 ? "" : "s"}`;
+    if (horas > 0) return `hace ${horas} hora${horas === 1 ? "" : "s"}`;
+    if (minutos > 0) return `hace ${minutos} minuto${minutos === 1 ? "" : "s"}`;
+    return `hace ${segundos} segundo${segundos === 1 ? "" : "s"}`;
 }
 
 obtenerTop();
