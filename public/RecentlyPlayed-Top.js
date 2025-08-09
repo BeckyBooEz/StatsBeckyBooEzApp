@@ -190,10 +190,10 @@ function cancionesRecentlyPlayed(tracks) {
         cancion.textContent = track.track.name;
 
         const popularidad = document.createElement("p")
-        popularidad.textContent = `Pop: ${track.track.popularity}`
+        popularidad.textContent = `Popularidad: ${track.track.popularity}`
 
         const album = document.createElement("p");
-        album.innerHTML = track.track.album.name;
+        album.textContent = `Album: ${track.track.album.name}`;
 
         const artist = document.createElement("p");
         artist.textContent = track.track.album.artists[0].name
