@@ -59,14 +59,14 @@ async function ObtenerCanciones() {
             }))
             .sort((a, b) => b.porcentaje - a.porcentaje);
 
-        const top4 = artistasOrdenados.slice(0, 9);
-        const otros = artistasOrdenados.slice(9);
+        const top = artistasOrdenados.slice(0, 14);
+        const otros = artistasOrdenados.slice(14);
 
         const tituloTop = document.createElement("h3");
         tituloTop.textContent = "Artistas más escuchados";
         contenedor.appendChild(tituloTop);
 
-        top4.forEach(artist => {
+        top.forEach(artist => {
             const p = document.createElement("p");
             p.textContent = `${artist.name} - ${artist.porcentaje.toFixed(2)}%`;
             contenedor.appendChild(p);
