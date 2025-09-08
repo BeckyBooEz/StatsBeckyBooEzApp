@@ -11,7 +11,7 @@ async function ObtenerCanciones() {
         const canciones = await response.json();
 
         const todosLosArtistas = [];
-        const estadisticas = canciones.items
+        const estadisticas = canciones.items;
 
         estadisticas.forEach(item => {
             const artistas = item.track.artists;
