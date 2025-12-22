@@ -59,24 +59,28 @@ async function ObtenerCanciones() {
             }))
             .sort((a, b) => b.porcentaje - a.porcentaje);
 
-        const top = artistasOrdenados.slice(0, 14);
-        const otros = artistasOrdenados.slice(14);
+        const top = artistasOrdenados.slice(0, 7);
+        const otros = artistasOrdenados.slice(7);
 
         const tituloTop = document.createElement("h3");
         tituloTop.textContent = "Artistas más escuchados";
+        tituloTop.style.textAlign = "center"
+        tituloTop.style.fontSize = "29px"
         contenedor.appendChild(tituloTop);
-
+        const vacio = document.createElement("div")
+        vacio.id = "hola"
         top.forEach(artist => {
             const p = document.createElement("p");
             p.textContent = `${artist.name} - ${artist.porcentaje.toFixed(2)}%`;
-            contenedor.appendChild(p);
+            vacio.appendChild(p)
         });
-
+        
         const porcentajeOtros = otros.reduce((acc, artist) => acc + artist.porcentaje, 0).toFixed(2);
-
+        
         const pOtros = document.createElement("p");
         pOtros.textContent = `Otros artistas - ${porcentajeOtros}%`;
-        contenedor.appendChild(pOtros);
+        vacio.appendChild(pOtros);
+        contenedor.appendChild(vacio);
 
     } catch (error) {
         console.error("No se cargaron canciones:", error);

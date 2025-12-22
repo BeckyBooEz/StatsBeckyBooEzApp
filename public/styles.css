@@ -200,6 +200,10 @@ select {
   object-fit: cover;
 }
 
+#hola{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
 @media (max-width: 1200px) {
   .toptracks {
     display: none;
