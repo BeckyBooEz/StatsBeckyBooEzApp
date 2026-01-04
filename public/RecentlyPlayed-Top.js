@@ -199,6 +199,11 @@ function cancionesRecentlyPlayed(tracks) {
         artist.textContent = track.track.album.artists[0].name
         artist.style.textDecoration = "underline"
 
+        const link = document.createElement("a");
+        link.href = track.track.external_urls.spotify;
+        link.textContent = "Ver en Spotify";
+        link.target = "_blank";
+
         const marcadetiempo = document.createElement("p");
         marcadetiempo.textContent = calcularTiempo(track)
 
@@ -207,6 +212,7 @@ function cancionesRecentlyPlayed(tracks) {
         datosContainer.appendChild(popularidad)
         datosContainer.appendChild(album)
         datosContainer.appendChild(artist);
+        datosContainer.appendChild(link)
         datosContainer.appendChild(marcadetiempo)
         datostarjeta.appendChild(datosContainer)
 
